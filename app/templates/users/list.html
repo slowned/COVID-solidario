@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<div class="mt-5 pt-3">
+  <div class="row">
+    <div class="col-10 paddingFix">
+      <form class="" action="{{ url_for('users.list') }}" method="POST">
+        <div class="form-row">
+          <div class="col-md-6 mb-6" style="margin-left: 0px;">
+            <input class="form-control" type="text" name="name" id="name" placeholder="Nombre de Usuario">
+          </div>
+          <div class="col-md-2 mb-1">
+            <select class="form-control" name="active">
+              <option value="" selected>Filtrar</option>
+              <option value="">Todos</option>
+              <option value="True">Activos</option>
+              <option value="False">Inactivos</option>
+            </select>
+          </div>
+          <div class="col-md-2 mb-1">
+            <button class="btn btn-outline-success" type="submit">Buscar</button><br><br>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% if has_permission(session["current_user"]["id"], "user_new") %}
+    <div class="col-2" style="padding-left: 55px;">
+      <a class="btn btn-primary" role="button" href="{{ url_for('users.create') }}" class="">Crear usuario</a>
+    </div>
+  {% endif %}
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nombre de usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Activo</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+
+        </thead>
+        <tbody>
+          {% for user in user_list.items %}
+          <tr>
+            <td>{{ user.user_name }}</td>
+            <td>{{ user.name}}</td>
+            <td>{{ user.surname }}</td>
+            {% if user.active %}
+            <td><b>ACTIVO</b></td>
+            {% else %}
+            <td><b>INACTIVO</b></td>
+            {% endif %}
+
+            {% if has_permission(session["current_user"]["id"], "user_show") %}
+            <td>
+              <a class="btn btn-info" role="button" href="{{ url_for('users.detail', user_id=user.id) }}"><i class=""
+                  data-position="right" data-tooltip="Ver mas">detalles</i></a>
+            </td>
+            {% endif %}
+            {% if has_permission(session["current_user"]["id"], "user_update") %}
+            <td>
+              <form method="GET" action="{{ url_for('users.update', user_id=user.id) }}"><button class="btn btn-success"
+                  type="submit"><i class="" data-position="right" data-tooltip="Editar">editar</i></button></form>
+            </td>
+            {% endif %}
+            {% if has_permission(session["current_user"]["id"], "user_destroy") %}
+            <td>
+              <form method="POST" action="{{ url_for('users.delete', user_id=user.id) }}" onclick="return confirm(' Seguro que desea eliminar el usuario?');"><button class="btn btn-danger"
+                  type="submit"><i class="" data-position="right" data-tooltip="Eliminar">borrar</i></button></form>
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table><br>
+    </div>
+  </div>
+  <div class="row mb-5 pb-5">
+    <nav>
+      <ul class="pagination pagination-center">
+        {% if user_list.has_prev %}
+        <li class="page-item"><a href="{{ url_for('users.list',page=user_list.prev_num) }}"><i class="page-item">&laquo;</i></a></li>
+        {% else %}
+        <li class="page-item disabled"><a href="#!"><i class="">&laquo;</i></a></li>
+        {% endif %}
+        {% for page in user_list.iter_pages() %}
+        {% if page %}
+        {% if page != user_list.page %}
+        <li class="page-item"><a href="{{ url_for('users.list',page=page) }}">{{ page }}</a></li>
+        {% else %}
+        <li class="page-item"><a href="#!">{{ page }}</a></li>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor %}
+        {% if user_list.has_next %}
+        <li class="page-item"><a href="{{ url_for('users.list',page=user_list.next_num) }}"><i class="page-item">&raquo;</i></a></li>
+        {% else %}
+        <li class="page-item disabled"><a href="#!"><i class="page-item">&raquo;</i></a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+{% endblock %}

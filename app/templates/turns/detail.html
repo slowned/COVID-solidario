@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Registrar turno{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center align-middle mt-3 mb-3">Detalle de Turno</h1>
+    <div class="col-8">    
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="name">Dia:</label>
+          <input type="text" readonly class="form-control disabled" name="date" value="{{turn.date}}">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="surname">Email de usuario:</label>
+          <input type="text" readonly class="form-control" name="user_email" value="{{turn.user_email}}">
+        </div>
+      </div>
+    </div>
+    <div class="col-8">    
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="surname">Hora inicio:</label>
+          <input type="text" readonly class="form-control" name="hora_inicio" value="{{turn.hora_inicio}}">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="name">Hora Fin:</label>
+          <input type="text" readonly class="form-control disabled" name="hora_fin" value="{{turn.hora_fin}}">
+        </div>
+      </div>
+    </div>
+    <div class="col-8">    
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="surname">Telefono:</label>
+          <input type="text" readonly class="form-control" name="user_phone" value="{{turn.user_phone}}">
+        </div>
+        <div class="col-md-6 mb-3 form-check">
+            {% if turn.asignado %}
+              <input type="checkbox" class="form-check-input" checked name="active" disabled>
+
+            {% else %}
+              <input type="checkbox"  class="form-check-input" name="active" >
+            {% endif %}
+              <label class="form-check-label" for="active">Asignado</label>
+        </div>
+      </div>
+    </div>
+    <a class="btn btn-info" href="{{url_for('turns.list')}}">Turnos Disponibles</a>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

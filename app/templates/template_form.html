@@ -1,0 +1,42 @@
+<!-- Este es un template base para que usemos todos el mismo criterio de diseño -->
+
+<!-- Template base actualizado -->
+
+<h1 class="text-center align-middle mt-3 mb-3">Aca va el título de la sección</h1>
+<div class="mt-3 mb-3">
+    <div class="col-8">
+      <form class="formFix" action="" method="">
+          <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="name"></label>
+                <input type="text" class="form-control" id="" name="" value="">                
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="name"></label>
+                <input type="text" class="form-control" id="" name="" value="">    
+              </div>
+          </div>
+          <!-- Aca muestra 2 imput por linea repetir el precedimiento para ir agregando de a pares -->
+      </form>
+    </div>
+</div>
+
+
+
+<div id="content" class="content" style="background:#acabab; ">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+</div>
+
+
+<!-- Esto lo que hace es alinear 2 imput en la misma linea  -->
+

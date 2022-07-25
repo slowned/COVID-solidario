@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<h1 class="text-center align-middle mt-3 mb-3">Detalle del Usuario: {{user.name}}</h1>
+<div class="row mt-3 mb-3">
+    <div class="col-8">    
+    <form class="formFix" action="{{ url_for('users.update', user_id=user.id) }}" method="GET">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="name">Nombre:</label>
+                <input type="text" readonly class="form-control disabled" id="name" name="name" value="{{user.name}}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="surname">Apellido:</label>
+                <input type="text" readonly class="form-control" id="surname" name="surname" value="{{user.surname}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="user_name">Nombre de Usuario:</label>
+                <input type="text" readonly class="form-control" id="user_name" name="user_name" value="{{user.user_name}}">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="email">Email:</label>
+                <input type="mail" readonly class="form-control" id="email" name="email" value="{{user.email}}">
+            </div>
+        </div>
+        <div class="form-check">
+            {% if user.active %}
+            <input type="checkbox" class="form-check-input" id="active" checked name="active" disabled>
+            {% else %}
+            <input type="checkbox"  class="form-check-input" id="active" name="active" >
+            {% endif %}
+            <label class="form-check-label" for="active">Activo</label>
+        </div>
+        <a type="reset" class="btn btn-link" href="{{url_for('users.list')}}">Volver</a>
+    </form>
+    </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Registrar turno{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center align-middle mt-3 mb-3">Registrar turno</h1>
+<div class="row">
+    {% if form.errors %} 
+        <div class="col.8">
+        {% for f in form._fields.items() %} 
+            {% if f[0] in form.errors %}        
+               {{ f[1].label.text }}: {{ f[1].errors[0] }} 
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>  
+<div class="row mt-3 mb-5">
+    <div class="col-8">    
+    <form class="formFix" action="{{ url_for('centers.register_turn', turn_id=turn.id) }}" method="POST">
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="user_email">Email:</label>
+            <input type="text" class="form-control" name="user_email">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="user_phone">Telefono:</label>
+            <input type="text" class="form-control" name="user_phone">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Registrar Turno</button>
+        <a type="reset" class="btn btn-danger" href="{{url_for('centers.list')}}">Cancelar</a>
+    </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% block title %}Configuracion{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<h1 class="text-center align-middle mt-3 mb-3">Parametros de la Aplicación</h1>
+<div class="mt-3 mb-3">
+    <div class="col-8">
+      <form class="formFix" action="{{ url_for('configuraciones.modify') }}"" method="POST">
+          <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="titulo">Título:</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" value="{{config.titulo}}" required>                
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="name">Contacto:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{config.email}}">    
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="max_rows">Cantidad máxima de elementos por página:</label>
+              <input type="number" name="max_rows" min="0" id="max_rows" required value='{{config.elementos_cantidad}}'/>                
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                {% if config.sitio_hab==1%}
+                    <input type="checkbox" class="form-check-input" id="sitio_habilitado" checked name="sitio_habilitado">
+                {% else %}
+                    <input type="checkbox" class="form-check-input" id="sitio_habilitado" name="sitio_habilitado">
+                {% endif %}
+                <label class="form-check-label" for="active">Sitio activo</label>
+                </div>
+            </div>
+          </div> 
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <div class="form-group">
+                    <label for="DescAsoc">Mensaje Sitio deshabilitado</label>
+                    <textarea class="form-control" resize="vertical" style="min-width: 100%" rows="5" name="mensaje_deshabilitado" id="mensaje_deshabilitado" required rows="20" cols="50">
+                    {{ config.mensaje_deshabilitado }}</textarea>
+                </div>    
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12 mb-3">
+              <div class="form-group">
+                <label for="DescAsoc">Descripcion Asociación</label>                    
+                <textarea class="form-control rounded-0"  rows="5" name="descripcion" id="DescAsoc" required rows="20" cols="50">{{ config.descripcion }}</textarea>
+              </div>     
+            </div>
+          </div> 
+          {% if has_permission(session["current_user"]["id"], "config_update") %}
+          <input class="btn btn-success" type="submit" class="boton" name="submit" value="Guardar" />
+          <a type="reset" class="btn btn-danger" href="{{url_for('home')}}">Cancelar</a>
+         {% endif %} 
+    </form>
+    </div>
+</div>
+{% endblock %}
+<div class="row mt-3 mb-3">  
+    <div class="col-8">     
+        <div class="row mt-3 mb-3"></div>     
+            <h1 class="text-center align-middle mt-3 mb-3">Parametros de la Aplicación</h1>
+            <form class="formFix" action="{{ url_for('configuraciones.modify') }}" method="POST">               
+                <div class="form-row">
+                    <div >
+                        <label>Titulo  <input type="text"  class="form-control" name="titulo" id="titulo" required value='{{config.titulo}}' /> </label>                
+                    </div>
+                </div>                    
+                <div class="form-row">
+                    <div>
+                    <label for="DescAsoc">Descripcion Asociación</label>                    
+                    <textarea class="form-control rounded-0"  rows="5" name="descripcion" id="DescAsoc" required rows="20" cols="50"> {{ config.descripcion }} </textarea>
+                    </div>
+                </div>                
+                <div class="form-row">
+                    <div class="col-md-3 mb-3">
+                        <label>Mail Asociacion: <input type="email" name="email" id="mailAsoc" required value='{{config.email}}'></label>                   
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-3">
+                        <label>Cantidad maxima de elementos por pagina en listados</label>
+                        <input type="number" name="max_rows" min="0" required value='{{config.elementos_cantidad}}' />                
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md- mb-3">
+                        <label><input type="checkbox" name="sitio_habilitado" id="cbox1" {% if config.sitio_hab == 1 %}checked{% else %} {% endif %}> Habilitar/Deshabilitar Sitio</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div >
+                        
+                                      
+                    </div>
+                </div>
+                {% if has_permission(session["current_user"]["id"], "config_update") %}
+                <div class="col-md-3 mb-3">
+                    <input class="btn btn-info" type="submit" class="boton" name="submit" value="Guardar" />
+                    <input type="reset" class="btn btn-danger" value="Cancel" /> 
+                </div>
+                {% endif %}            
+            </form>         
+        </div>
+    </div>
+</div>

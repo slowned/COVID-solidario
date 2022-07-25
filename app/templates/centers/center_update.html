@@ -1,0 +1,162 @@
+{% extends "layout.html" %}
+{% block title %}Centros de Ayuda{% endblock %}
+{% block head %}
+{{ super() }}
+<script type="text/javascript" src="{{ url_for('static', filename='get_municipios_edit.js')}}"> </script>
+<script type="text/javascript" src="{{ url_for('static', filename='get_municipio.js')}}"> </script>
+
+ <!-- LEAFLET -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/map.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='map_update.js') }}"></script>
+<script  > get_municipio() </script>
+{% endblock %}
+{% block content %}
+<h1 class="text-center align-middle mt-1 mb-1">Modificar Centro {{center.name}} </h1>
+<div class="row">
+  {% if form.errors %} 
+  <div class="alert alert-danger" role="alert"> 
+      {% for f in form._fields.items() %} 
+          {% if f[0] in form.errors %}        
+             {{ f[1].label.text }}: {{ f[1].errors[0] }} 
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+</div>  
+</div>
+  <div class="mt-3 mb-3">
+      <div class="col-8">
+        <form class="formFix" action="{{ url_for('centers.update' , center_id=center.id) }}" enctype="multipart/form-data" method="POST" onsubmit="submitHandler(event)">
+           
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="name">Nombre:*</label>
+                  <input type="text" class="form-control" id="name" name="name" required  value="{{center.name}}">                
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="surname">Direccion:*</label>
+                  <input type="text" class="form-control" id="address" name="address" required  value="{{center.address}}">    
+                </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="phone">Telefono (introducir solo números):</label>
+                <input type="text" class="form-control" id="phone" name="phone" pattern = "[0-9]+" required  value="{{center.phone}}">                
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="web_site">Web:</label>
+                <input type="text" class="form-control" id="web_site" name="web_site"  value="{{center.web}}">    
+              </div> 
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email"  value="{{center.email}}">                
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="open_hour">Hora de Apertura*:</label>
+                <input type="time" class="form-control" id="open_hour" name="open_hour" required  value={{center.open_hour}}>                
+              </div>
+             
+              <div class="col-md-6 mb-3">
+                <label for="close_hour">Hora de Cierre*:</label>
+                <input type="time" class="form-control" id="close_hour" name="close_hour" required  value={{center.close_hour}}>    
+              </div> 
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <input type="text" class="form-control" id="township_id" disabled name="township" style="visibility:hidden" value="{{center.township}}">      
+                
+                <label for="township">Municipio:*</label>
+                <select type="select" class="form-control" id="township" name="township" value={{center.township}}>      
+                  <option value="" id="optionDefault" disabled selected>{{center.township}}</option>
+                </select>          
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="center_type">Tipo de centro:*</label>
+                <select  type="select" class="form-control" id="center_type" name="center_type" value={{center.center_type}}>
+                  <option  value="{{center.center_type_id}}" selected>{{center.center_type}} </option>
+                  {% for center_type in center_types %}
+                  <option name="center_type_option" id="center_type_option" value="{{ center_type.id }}"> {{ center_type.name }}</option>
+                  {% endfor %}               
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="view_protocol">Protocolo:</label>
+                {% if (center.view_protocol == None or center.view_protocol == '' or center.view_protocol == 'No disponible')  %}
+                <a > No posee </a>
+                <input type="file" class="form-control" accept="application/pdf" id="view_protocol"  name="view_protocol" value={{center.view_protocol}}> 
+              
+              {% else %}
+              <a target = "_blank" href="/static/uploads/{{center.view_protocol}}">Ver Protocolo Actual</a>
+              <input type="file" class="form-control" accept="application/pdf" id="view_protocol"  name="view_protocol" value={{center.view_protocol}} > 
+                
+              {% endif %}          
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <input type="text"  id="lat" name="lat" value="{{ center.lat }}" style="visibility:hidden">                
+              </div>
+              <div class="col-md-6 mb-3">
+                
+                <input type="text"  id="lng" name="lng" value="{{ center.lng }}" style="visibility:hidden">    
+              </div>
+            </div>
+            
+
+            <div  id="mapupdate"></div>
+
+                  
+            <div class="form-row mt-1">
+                <div class="col-md-12 mb-3">
+                  <button type="submit" class="btn btn-success">Actualizar</button>
+                  <a type="reset" class="btn btn-danger" href="{{url_for('centers.list')}}">Volver</a>
+                </div>
+            </div>
+            
+                        
+        </form>
+        
+          
+        
+          
+         
+        </div>
+                   
+      </div>
+  </div>
+
+  
+  
+</div>
+</div>
+<script>get_municipios_edit();</script>
+  
+  
+  
+ 
+  {% endblock %}
+

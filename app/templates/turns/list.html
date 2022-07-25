@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block title %}Turnos Disponibles{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="mt-5 pt-3">
+  <div class="row">
+    <form action="{{ url_for('turns.list') }}" method="GET">
+      <div class="col-md-12 mb-8" style="margin-left: 0px;">
+        <label for="user_phone">Telefono de usuario:</label>
+        <input class="form-control" type="text" name="user_phone" placeholder="221-6566931">
+      </div>
+      <div class="col-md-12 mb-8" style="margin-left: 0px;">
+        <label for="uuser_email">Email de usuario:</label>
+        <input class="form-control" type="text" name="user_email" placeholder="juan@ejemplo.com">
+      </div>
+      <div class="col-md-2 mb-1">
+        <button class="btn btn-outline-success" type="submit">Buscar</button><br><br>
+      </div>
+    </form>
+    
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Dia</th>
+            <th scope="col">Hora Inicio</th>
+            <th scope="col">Hora Fin</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Reservar</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for turn in turns.items %}
+            <tr>
+              <td>{{ turn.id }}</td>
+              <td>{{ turn.date }}</td>
+              <td>{{ turn.hora_inicio }}</td>
+              <td>{{ turn.hora_fin }}</td>
+              <td>{{ turn.user_phone }}</td>
+              <td>{{ turn.user_email }}</td>
+              <td>
+                {% if turn.asignado %}
+                  <a class="btn btn-danger" role="button" href="{{ url_for('turns.delete', turn_id=turn.id) }}">Eliminar</a>
+                {% else %}
+                  <a class="btn btn-info" role="button" href="{{ url_for('centers.register_turn', turn_id=turn.id) }}">Reservar</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mb-5 pb-5">
+    <nav>
+      <ul class="pagination pagination-center">
+        {% if turns.has_prev %}
+        <li class="page-item"><a href="{{ url_for('turns.list', page=turns.prev_num) }}"><i class="page-item">&laquo;</i></a></li>
+        {% else %}
+        <li class="page-item disabled"><a href="#!"><i class="">&laquo;</i></a></li>
+        {% endif %}
+        {% for page in turns.iter_pages() %}
+        {% if page %}
+        {% if page != turns.page %}
+        <li class="page-item"><a href="{{ url_for('turns.list', page=page) }}">{{ page }}</a></li>
+        {% else %}
+        <li class="page-item"><a href="#!">{{ page }}</a></li>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor %}
+        {% if turns.has_next %}
+        <li class="page-item"><a href="{{ url_for('turns.list', page=turns.next_num) }}"><i class="page-item">&raquo;</i></a></li>
+        {% else %}
+        <li class="page-item disabled"><a href="#!"><i class="page-item">&raquo;</i></a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

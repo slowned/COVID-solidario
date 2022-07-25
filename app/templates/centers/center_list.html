@@ -1,0 +1,178 @@
+{% extends "layout.html" %}
+{% block title %}Centros{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<div class="mt-5 pt-3">
+  <div class="row">
+    <div class="col-10 paddingFix">
+      {% with messages = get_flashed_messages() %}
+      {% if messages%}
+		        {% for message in messages %}
+				<div class="alert alert-danger" role="alert">
+					{{ message }}  
+				</div>
+		    	{% endfor %}	
+	        {% endif %}
+	        {% endwith %}
+      <form class="" action="{{ url_for('centers.list') }}" method="POST">
+        <div class="form-row">
+          <div class="col-md-6 mb-6" style="margin-left: 0px;">
+            <input class="form-control" type="text" name="name" id="name" placeholder="Nombre de Centro">
+          </div>
+          <div class="col-md-2 mb-1">
+            <select class="form-control" name="publish">
+              <option value="" disabled selected>Filtrar</option>
+              <option value="">Todos</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Aceptado">Aceptado</option>
+              <option value="Rechazado">Rechazado</option>
+            </select>
+          </div>
+          <div class="col-md-2 mb-1">
+            <button class="btn btn-outline-success" type="submit">Buscar</button><br><br>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% if has_permission(session["current_user"]["id"], "center_new") %}
+    <div class="col-2" style="padding-left: 55px;">
+      <a class="btn btn-primary" role="button" href="{{ url_for('centers.create') }}" class="">Crear Centro</a>
+    </div>
+  {% endif %}
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nombre de centro</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Estado</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+
+        </thead>
+        
+        <tbody>
+          {% for center in center_list.items %}
+          <tr>
+            <td>{{center.name}}</td>
+            <td>{{center.address}}</td>
+            <td>{{center.phone}}</td>
+            {% if center.publish == 'Pendiente' %}
+            <td><b>Pendiente</b></td>
+            {% elif center.publish == 'Aceptado' %}
+            <td><b>Aceptado</b></td>
+            {% elif center.publish == 'Rechazado' %}
+            <td><b>Rechazado</b></td>
+            {% endif %}
+            <!-- Colocar permiso para cambio de estado antes -->
+            {% if has_permission(session["current_user"]["id"], "center_update") %}
+            {% if center.publish == 'Pendiente' %}
+            <td>
+              <form method="POST" action="{{ url_for('centers.accept', center_id=center.id) }}" onclick="return confirm(' Seguro que desea aceptar el centro?');"><button class="btn btn-success"
+                  type="submit"><i class="" data-position="right" data-tooltip="Aceptar">Aceptar</i></button></form>
+            </td>
+            <td>
+              <form method="POST" action="{{ url_for('centers.reject', center_id=center.id) }}" onclick="return confirm(' Seguro que desea rechazar el centro?');"><button class="btn btn-danger"
+                  type="submit"><i class="" data-position="right" data-tooltip="Rechazar" >Rechazar</i></button></form>
+            </td>
+            {% else %}
+            <td></td>
+            <td></td>
+            {% endif %}
+            {% if has_permission(session["current_user"]["id"], "center_show") %}
+            <td>
+            {% endif %}  
+              <a class="btn btn-info" role="button" href="{{ url_for('centers.detail', center_id=center.id) }}"><i class=""
+                  data-position="right" data-tooltip="Ver mas">detalles</i></a>
+            </td>
+            {% endif %}
+            {% if has_permission(session["current_user"]["id"], "center_update") %}
+            <td>
+              <form method="GET" action="{{ url_for('centers.update', center_id=center.id) }}"><button class="btn btn-success"
+                  type="submit"><i class="" data-position="right" data-tooltip="Editar">editar</i></button></form>
+            </td>
+            {% endif %}
+            {% if has_permission(session["current_user"]["id"], "center_destroy") %}
+            <td>
+              <form method="POST" action="{{ url_for('centers.delete', center_id=center.id) }}" onclick="return confirm(' Seguro que desea eliminar el centro?');"><button class="btn btn-danger"
+                  type="submit"><i class="" data-position="right" data-tooltip="Eliminar">borrar</i></button></form>
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table><br>
+    </div>
+  </div>
+  <div class="row mb-5 pb-5">
+    <nav>
+      <ul class="pagination pagination-center">
+        {% if center_list.has_prev %}
+        <li class="page-item"><a href="{{ url_for('centers.list',page=center_list.prev_num) }}"><i class="page-item">&laquo;</i></a></li>
+        {% else %}
+        <li class="page-item disabled"><a href="#!"><i class="">&laquo;</i></a></li>
+        {% endif %}
+        {% for page in center_list.iter_pages() %}
+        {% if page %}
+        {% if page != center_list.page %}
+        <li class="page-item"><a href="{{ url_for('centers.list',page=page) }}">{{ page }}</a></li>
+        {% else %}
+        <li class="page-item"><a href="#!">{{ page }}</a></li>
+        {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor %}
+        {% if center_list.has_next %}
+        <li class="page-item"><a href="{{ url_for('centers.list',page=center_list.next_num) }}"><i class="page-item">&raquo;</i></a></li>
+        {% else %}
+        <li class="page-item disabled"><a href="#!"><i class="page-item">&raquo;</i></a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

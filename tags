@@ -1,0 +1,160 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BaseConfig	config.py	/^class BaseConfig(object):$/;"	c
+CONFIG	config.py	/^CONFIG = dict($/;"	v
+Center	app/models/center.py	/^class Center(db.Model):$/;"	c
+Configuracion	app/models/configuracion.py	/^class Configuracion(db.Model):$/;"	c
+CreateLoginForm	app/forms/login.py	/^class CreateLoginForm(Form):    $/;"	c
+CreateUserForm	app/forms/users.py	/^class CreateUserForm(Form):$/;"	c
+DB_HOST	config.py	/^    DB_HOST = "bd_name"$/;"	v	class:BaseConfig
+DB_HOST	config.py	/^    DB_HOST = environ.get("DB_HOST", "localhost")$/;"	v	class:TestingConfig
+DB_NAME	config.py	/^    DB_NAME = "db_name"$/;"	v	class:BaseConfig
+DB_NAME	config.py	/^    DB_NAME = environ.get("DB_NAME", "grupo19")$/;"	v	class:TestingConfig
+DB_PASS	config.py	/^    DB_PASS = "db_pass"$/;"	v	class:BaseConfig
+DB_PASS	config.py	/^    DB_PASS = environ.get("DB_PASS", "admin")$/;"	v	class:TestingConfig
+DB_USER	config.py	/^    DB_USER = "db_user"$/;"	v	class:BaseConfig
+DB_USER	config.py	/^    DB_USER = environ.get("DB_USER", "admin")$/;"	v	class:TestingConfig
+DEBUG	config.py	/^    DEBUG = None$/;"	v	class:BaseConfig
+DEBUG	config.py	/^    DEBUG = environ.get("DEBUG", False)$/;"	v	class:ProductionConfig
+DEBUG	config.py	/^    DEBUG = environ.get("DEBUG", True)$/;"	v	class:DevelopmentConfig
+DEBUG	config.py	/^    DEBUG = environ.get("DEBUG", True)$/;"	v	class:TestingConfig
+DevelopmentConfig	config.py	/^class DevelopmentConfig(BaseConfig):$/;"	c
+ENV	config.py	/^    ENV = "development"$/;"	v	class:DevelopmentConfig
+ENV	config.py	/^    ENV = "production"$/;"	v	class:ProductionConfig
+ENV	config.py	/^    ENV = "testing"$/;"	v	class:TestingConfig
+EXPLAIN_TEMPLATE_LOADING	config.py	/^    EXPLAIN_TEMPLATE_LOADING = True$/;"	v	class:DevelopmentConfig
+Permission	app/models/user.py	/^class Permission(db.Model):$/;"	c
+Persona	sara.py	/^class Persona():$/;"	c
+ProductionConfig	config.py	/^class ProductionConfig(BaseConfig):$/;"	c
+Role	app/models/user.py	/^class Role(db.Model):$/;"	c
+SECRET_KEY	config.py	/^    SECRET_KEY = "secret"$/;"	v	class:BaseConfig
+SECRET_KEY	config.py	/^    SECRET_KEY = 'p9Bv<3Eid9%$i01'$/;"	v	class:DevelopmentConfig
+SECRET_KEY	config.py	/^    SECRET_KEY = 'p9Bv<3Eid9%$i01'$/;"	v	class:ProductionConfig
+SQLALCHEMY_DATABASE_URI	config.py	/^    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql:\/\/admin:admin@localhost\/grupo19'$/;"	v	class:DevelopmentConfig
+SQLALCHEMY_DATABASE_URI	config.py	/^    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql:\/\/grupo19:NTNkMzM3NGUxYjdm@127.0.0.1\/grupo19'$/;"	v	class:ProductionConfig
+SQLALCHEMY_ECHO	config.py	/^    SQLALCHEMY_ECHO = True$/;"	v	class:DevelopmentConfig
+SQLALCHEMY_TRACK_MODIFICATIONS	config.py	/^    SQLALCHEMY_TRACK_MODIFICATIONS = True  # to fix error ??$/;"	v	class:DevelopmentConfig
+TESTING	config.py	/^    TESTING = True$/;"	v	class:TestingConfig
+TestingConfig	config.py	/^class TestingConfig(BaseConfig):$/;"	c
+Turn	app/models/center.py	/^class Turn(db.Model):$/;"	c
+UpdateUserForm	app/forms/users.py	/^class UpdateUserForm(Form):    $/;"	c
+User	app/models/user.py	/^class User(db.Model):$/;"	c
+__all__	app/forms/login.py	/^__all__ = ['CreateLoginForm']$/;"	v
+__all__	app/forms/users.py	/^__all__ = ['CreateUserForm' , 'UpdateUserForm']$/;"	v
+__all__	app/models/configuracion.py	/^__all__ = ['Configuracion']$/;"	v
+__all__	app/models/user.py	/^__all__ = ['User', 'Permission', 'Role']$/;"	v
+__all__	app/resources/user.py	/^__all__ = ['create']$/;"	v
+__init__	sara.py	/^    def __init__(self, name, surname):$/;"	m	class:Persona
+__repr__	app/models/user.py	/^    def __repr__(self):$/;"	m	class:Permission	file:
+__repr__	app/models/user.py	/^    def __repr__(self):$/;"	m	class:Role	file:
+__repr__	app/models/user.py	/^    def __repr__(self):$/;"	m	class:User	file:
+__str__	app/models/user.py	/^    def __str__(self):$/;"	m	class:Permission	file:
+__tablename__	app/models/configuracion.py	/^    __tablename__ = 'configuraciones'$/;"	v	class:Configuracion
+__tablename__	app/models/user.py	/^    __tablename__ = 'permissions'$/;"	v	class:Permission
+__tablename__	app/models/user.py	/^    __tablename__ = 'roles'$/;"	v	class:Role
+__tablename__	app/models/user.py	/^    __tablename__ = 'users'$/;"	v	class:User
+active	app/forms/users.py	/^    active = BooleanField('Activo')$/;"	v	class:CreateUserForm
+active	app/forms/users.py	/^    active = BooleanField('Activo')$/;"	v	class:UpdateUserForm
+active	app/models/user.py	/^    active = db.Column(db.Boolean, default=True)$/;"	v	class:User
+all	app/models/configuracion.py	/^    def all(cls):$/;"	m	class:Configuracion
+all	app/models/user.py	/^    def all(cls):$/;"	m	class:Permission
+all	app/models/user.py	/^    def all(cls):$/;"	m	class:Role
+all	app/models/user.py	/^    def all(cls):$/;"	m	class:User
+app	run.py	/^app = create_app(config_name)$/;"	v
+authenticated	app/helpers/auth.py	/^def authenticated(session):$/;"	f
+auths	app/resources/__init__.py	/^auths = Blueprint('auths', __name__)$/;"	v
+check_habilitado	app/helpers/sitio_habilitado.py	/^def check_habilitado():$/;"	f
+config_name	run.py	/^config_name = os.getenv('FLASK_CONFIG')$/;"	v
+configuraciones	app/resources/__init__.py	/^configuraciones = Blueprint('configuraciones', __name__)$/;"	v
+configure	config.py	/^    def configure(app):$/;"	m	class:BaseConfig
+create	app/models/user.py	/^    def create(cls, form):$/;"	m	class:User
+create	app/resources/turn.py	/^def create():$/;"	f
+create	app/resources/turns.py	/^def create(permiso=""):$/;"	f
+create	app/resources/user.py	/^def create(permiso=""):$/;"	f
+create_app	app/__init__.py	/^def create_app(environment="development"):$/;"	f
+current_user	app/helpers/auth.py	/^def current_user(user_id):$/;"	f
+db	app/__init__.py	/^db = SQLAlchemy()$/;"	v
+delete	app/models/user.py	/^    def delete(cls, pk):$/;"	m	class:User
+delete	app/resources/user.py	/^def delete(user_id, permiso=""):$/;"	f
+descripcion	app/models/configuracion.py	/^    descripcion = db.Column(db.String(255), nullable=False)$/;"	v	class:Configuracion
+detail	app/resources/user.py	/^def detail(user_id, permiso=""):$/;"	f
+development	config.py	/^    development=DevelopmentConfig,$/;"	v
+elementos_cantidad	app/models/configuracion.py	/^    elementos_cantidad = db.Column(db.String(60), nullable=False)$/;"	v	class:Configuracion
+email	app/forms/login.py	/^    email = StringField('Email', [validators.InputRequired(message='Campo requerido')])$/;"	v	class:CreateLoginForm
+email	app/forms/users.py	/^    email = StringField('Email', [validators.Email(), validators.InputRequired(message='Campo requerido')])$/;"	v	class:CreateUserForm
+email	app/forms/users.py	/^    email = StringField('Email', [validators.Email(), validators.InputRequired(message='Campo requerido')])$/;"	v	class:UpdateUserForm
+email	app/models/configuracion.py	/^    email = db.Column(db.String(60), nullable=False)$/;"	v	class:Configuracion
+email	app/models/user.py	/^    email = db.Column(db.String(60), unique=True, nullable=False)$/;"	v	class:User
+filter_by_email_and_username	app/models/user.py	/^    def filter_by_email_and_username(cls, email, user_name):$/;"	m	class:User
+filter_by_username	app/models/user.py	/^    def filter_by_username(cls, username):$/;"	m	class:User
+filter_one_by_email_and_username	app/models/user.py	/^    def filter_one_by_email_and_username(cls, email, user_name):$/;"	m	class:User
+find_by_email	app/helpers/auth.py	/^def find_by_email(user_input):$/;"	f
+find_by_email_and_pass	app/models/user.py	/^    def find_by_email_and_pass(cls, email, password):$/;"	m	class:User
+find_by_id	app/models/user.py	/^    def find_by_id(cls, user_id):$/;"	m	class:User
+find_by_name	app/models/user.py	/^    def find_by_name(cls, name):$/;"	m	class:Permission
+find_by_name	app/models/user.py	/^    def find_by_name(cls, name):$/;"	m	class:Role
+has_permission	app/helpers/auth.py	/^def has_permission(user_id, permission):$/;"	f
+has_permission	app/models/user.py	/^    def has_permission(cls, user_id, permission):$/;"	m	class:User
+has_role	app/models/user.py	/^    def has_role(self, role_name):$/;"	m	class:User
+home	app/__init__.py	/^    def home():$/;"	f	function:create_app
+id	app/models/configuracion.py	/^    id = db.Column(db.Integer, primary_key=True)$/;"	v	class:Configuracion
+id	app/models/user.py	/^    id = db.Column(db.Integer(), primary_key=True)$/;"	v	class:Role
+id	app/models/user.py	/^    id = db.Column(db.Integer, primary_key=True)$/;"	v	class:Permission
+id	app/models/user.py	/^    id = db.Column(db.Integer, primary_key=True)$/;"	v	class:User
+index	app/resources/configuracion.py	/^def index():$/;"	f
+index	app/resources/sitio_deshabilitado.py	/^def index():$/;"	f
+is_active	app/models/user.py	/^    def is_active(self):$/;"	m	class:User
+is_not_active	app/helpers/auth.py	/^def is_not_active(user):$/;"	f
+is_not_admin	app/helpers/auth.py	/^def is_not_admin(user):$/;"	f
+items_paginas	app/models/configuracion.py	/^    def items_paginas(cls):$/;"	m	class:Configuracion
+list	app/resources/user.py	/^def list(page, permiso=''):$/;"	f
+login	app/resources/auth.py	/^def login():$/;"	f
+logout	app/resources/auth.py	/^def logout():$/;"	f
+mensaje_deshabilitado	app/models/configuracion.py	/^    mensaje_deshabilitado = db.Column(db.String(255), nullable=False)$/;"	v	class:Configuracion
+method_error	app/helpers/handler.py	/^def method_error(e):$/;"	f
+modify	app/models/configuracion.py	/^    def modify(cls, nueva_config):$/;"	m	class:Configuracion
+modify	app/resources/configuracion.py	/^def modify():$/;"	f
+msj_deshabilitado	app/models/configuracion.py	/^    def msj_deshabilitado(cls):$/;"	m	class:Configuracion
+name	app/forms/users.py	/^    name = StringField('Nombre', [validators.DataRequired(message='Este es un campo requerido'), validate_char])$/;"	v	class:CreateUserForm
+name	app/forms/users.py	/^    name = StringField('Nombre', [validators.DataRequired(message='Este es un campo requerido'), validate_char])$/;"	v	class:UpdateUserForm
+name	app/models/user.py	/^    name = db.Column(db.String(60))$/;"	v	class:User
+name	app/models/user.py	/^    name = db.Column(db.String(60), unique=True, nullable=False)$/;"	v	class:Permission
+name	app/models/user.py	/^    name = db.Column(db.String(60), unique=True, nullable=False)$/;"	v	class:Role
+not_found_error	app/helpers/handler.py	/^def not_found_error(e):$/;"	f
+password	app/forms/login.py	/^    password = StringField('Password', [validators.InputRequired(message='Campo requerido')])$/;"	v	class:CreateLoginForm
+password	app/forms/users.py	/^    password = StringField('Password', [validators.InputRequired(message='Campo requerido')])$/;"	v	class:CreateUserForm
+password	app/models/user.py	/^    def password(self):$/;"	m	class:User
+password	app/models/user.py	/^    def password(self, password):$/;"	m	class:User
+password_hash	app/models/user.py	/^    password_hash = db.Column(db.String(128))$/;"	v	class:User
+permissions	app/models/user.py	/^    permissions = db.relationship("Permission", secondary=role_has_permission)$/;"	v	class:Role
+production	config.py	/^    production=ProductionConfig,$/;"	v
+role	app/models/user.py	/^    role = db.relationship("Role", secondary=user_has_role)$/;"	v	class:User
+role_has_permission	app/models/user.py	/^role_has_permission = db.Table('role_has_permission', db.Model.metadata,$/;"	v
+roles	app/forms/users.py	/^    roles = StringField('Roles', [validators.InputRequired(message='Campo requerido')])$/;"	v	class:CreateUserForm
+saludar	sara.py	/^    def saludar(self):$/;"	m	class:Persona
+session_update	app/helpers/auth.py	/^def session_update(session, user):$/;"	f
+site_down	app/helpers/auth.py	/^def site_down():$/;"	f
+sitio_hab	app/models/configuracion.py	/^    sitio_hab = db.Column(db.Boolean, default=True)$/;"	v	class:Configuracion
+sitio_habilitado	app/models/configuracion.py	/^    def sitio_habilitado(cls):$/;"	m	class:Configuracion
+sitios_deshabilitados	app/resources/__init__.py	/^sitios_deshabilitados = Blueprint('sitios_deshabilitados', __name__)$/;"	v
+st_habilitado	app/helpers/sitio_habilitado.py	/^def st_habilitado():$/;"	f
+surname	app/forms/users.py	/^    surname = StringField('Apellido', [validators.DataRequired(message='Este es un campo requerido'), validate_char])$/;"	v	class:CreateUserForm
+surname	app/forms/users.py	/^    surname = StringField('Apellido', [validators.DataRequired(message='Este es un campo requerido'), validate_char])$/;"	v	class:UpdateUserForm
+surname	app/models/user.py	/^    surname = db.Column(db.String(60))$/;"	v	class:User
+testing	config.py	/^    testing=TestingConfig,$/;"	v
+titulo	app/models/configuracion.py	/^    titulo = db.Column(db.String(60), nullable=False)$/;"	v	class:Configuracion
+turns	app/resources/__init__.py	/^turns = Blueprint('turns', __name__)$/;"	v
+unauthorized_error	app/helpers/handler.py	/^def unauthorized_error(e):$/;"	f
+update	app/models/user.py	/^    def update(self, form):$/;"	m	class:User
+update	app/resources/user.py	/^def update(user_id, permiso=""):$/;"	f
+user_has_role	app/models/user.py	/^user_has_role = db.Table('user_has_role', db.Model.metadata,$/;"	v
+user_name	app/forms/users.py	/^    user_name = StringField('Nombre de usuario', [validators.InputRequired(message='Campo requerido')])$/;"	v	class:CreateUserForm
+user_name	app/forms/users.py	/^    user_name = StringField('Nombre de usuario', [validators.InputRequired(message='Campo requerido')])$/;"	v	class:UpdateUserForm
+user_name	app/models/user.py	/^    user_name = db.Column(db.String(60), unique=True, nullable=False)$/;"	v	class:User
+users	app/resources/__init__.py	/^users = Blueprint('users', __name__)$/;"	v
+validate_char	app/forms/users.py	/^def validate_char(form, field):$/;"	f
+verify_password	app/models/user.py	/^    def verify_password(self, password):$/;"	m	class:User

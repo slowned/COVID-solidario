@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+{% block title %}Centros de Ayuda{% endblock %}
+{% block head %}
+{{ super() }}
+<script type="text/javascript" src="{{ url_for('static', filename='municipios.js')}}"> </script>
+<script type="text/javascript" src="{{ url_for('static', filename='hour_validate.js')}}"> </script>
+
+
+ <!-- LEAFLET -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
+
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/map.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='map_create.js') }}"></script>
+
+<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+
+<scripc src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></scripc>
+
+<script>get_municipios();</script>
+{% endblock %}
+{% block content %}
+<h1 class="text-center align-middle mt-1 mb-1">Agregar Centro </h1> 
+<div class="row">
+  {% if form.errors %} 
+  <div class="alert alert-danger" role="alert"> 
+      {% for f in form._fields.items() %} 
+       
+          {% if f[0] in form.errors %}  
+                
+             {{ f[1].label.text }}: {{ f[1].errors[0] }} 
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+</div>  
+</div>
+  <div class="mt-3 mb-3">
+      <div class="col-8">
+      <form class="formFix" action="{{ url_for('centers.create') }}" method="POST" enctype="multipart/form-data"  onsubmit="submitHandler(event)">
+            
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="name">Nombre:*</label>
+                  <input type="text" class="form-control" id="name" name="name" required placeholder="Nombre">                
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="surname">Direccion:*</label>
+                  <input type="text" class="form-control" id="address" name="address" required placeholder="Direccion">    
+                </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="phone">Telefono (introducir solo números):</label>
+                <input type="tel" class="form-control" id="phone" name="phone" pattern = "[0-9]+" required placeholder="Telefono">                
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="web_site">Web:</label>
+                <input type="text" class="form-control" id="web_site" name="web_site" placeholder="Direccion Web">    
+              </div> 
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email">                
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="open_hour">Hora de Apertura*:</label>
+                <input type="time" class="form-control" id="open_hour" name="open_hour" required placeholder="Hora de apertura" >                
+              </div>
+             
+              <div class="col-md-6 mb-3">
+                <label for="close_hour">Hora de Cierre*:</label>
+                <input type="time" class="form-control" id="close_hour" name="close_hour" required placeholder="Hora de cierre" >    
+              </div> 
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="township">Municipio:*</label>
+                <select type="select" class="form-control" id="township" name="township">      
+                  <option value="" disabled selected>Seleccione un municipio</option>
+                </select>          
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="center_type">Tipo de centro:*</label>
+                <select  type="select" class="form-control" id="center_type" name="center_type">
+                  <option  value="" disabled selected>Seleccione tipo de centro </option>
+                  {% for center_type in center_types %}
+                  <option name="center_type_option" id="center_type_option" value="{{ center_type.id }}"> {{ center_type.name }}</option>
+                  {% endfor %}               
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="view_protocol">Protocolo:</label>
+                <input type="file" class="form-control" accept="application/pdf" id="view_protocol"  name="view_protocol"> 
+                               
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <input type="text"  id="lat" name="lat" style="visibility:hidden" >                
+              </div>
+              <div class="col-md-6 mb-3">
+                
+                <input type="text"  id="lng" name="lng"  style="visibility:hidden" >    
+              </div>
+            </div>
+            
+
+            <div  id="map"></div>
+
+                  
+            <div class="form-row mt-1">
+                <div class="col-md-12 mb-3">
+                  <button type="submit" class="btn btn-success">Crear</button>
+                  <a type="reset" class="btn btn-danger" href="{{url_for('centers.list')}}">Volver</a>
+                </div>
+            </div>
+            
+                        
+        </form>
+        
+          
+        
+          
+         
+        </div>
+                   
+      </div>
+  </div>
+
+  
+  
+</div>
+</div>
+<script>get_municipios();</script>
+  
+  
+  
+ 
+  {% endblock %}
+

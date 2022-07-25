@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Turnos disponibles{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Dia</th>
+          <th scope="col">Hora Inicio</th>
+          <th scope="col">Hora Fin</th>
+          <th scope="col">turno numero</th>
+          <th scope="col">Reservar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for turn in turns %}
+          <tr>
+            <td>{{ turn.date }}</td>
+            <td>{{ turn.hora_inicio }}</td>
+            <td>{{ turn.hora_fin }}</td>
+            <td>{{ turn.numero }}</td>
+            <td>
+              <a class="btn btn-info" role="button" href="{{ url_for('centers.register_turn', turn_id=turn.id) }}">Reservar</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}
