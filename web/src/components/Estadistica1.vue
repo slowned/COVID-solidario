@@ -32,18 +32,11 @@ const EMPTY_DATA = {
         this.getData()
     },
     created() {
-  //      axios.get('https://admin-grupo19.proyecto2020.linti.unlp.edu.ar/tiposCentro')
       axios.get(process.env.VUE_APP_BACKEND +'/tiposCentro')
-       // axios.get('http://:5000/tiposCentro')
       .then(response => {
-        // JSON responses are automatically parsed.
-       
-        //this.chartData.rows = response.data.centros
         this.dat= response.data.centros
         DATA_FROM_BACKEND.rows= response.data.centros
-    this.getData()
- 
-        
+        this.getData()
       })
       .catch(e => {
         this.api_errors.push(e)
@@ -65,7 +58,6 @@ const EMPTY_DATA = {
       
       getData () {
         this.loading = true
-        // ajax get data ....
         setTimeout(() => {
           this.chartData = this.chartData.rows.length
             ? EMPTY_DATA

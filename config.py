@@ -23,7 +23,7 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = environ.get("DEBUG", True)
     SQLALCHEMY_ECHO = True
     SECRET_KEY = 'p9Bv<3Eid9%$i01'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://admin:admin@localhost/grupo19'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://admin:admin@localhost/centros'
     EXPLAIN_TEMPLATE_LOADING = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True  # to fix error ??
 
@@ -36,7 +36,7 @@ class TestingConfig(BaseConfig):
     DB_HOST = environ.get("DB_HOST", "localhost")
     DB_USER = environ.get("DB_USER", "admin")
     DB_PASS = environ.get("DB_PASS", "admin")
-    DB_NAME = environ.get("DB_NAME", "grupo19")
+    DB_NAME = environ.get("DB_NAME", "centros")
 
 
 class ProductionConfig(BaseConfig):
@@ -45,11 +45,11 @@ class ProductionConfig(BaseConfig):
     ENV = "production"
     DEBUG = environ.get("DEBUG", False)
     # DB_HOST = environ.get("DB_HOST", "localhost")
-    # DB_USER = environ.get("DB_USER", "grupo19")
+    # DB_USER = environ.get("DB_USER", "centros")
     # DB_PASS = environ.get("DB_PASS", "NTNkMzM3NGUxYjdm")
-    # DB_NAME = environ.get("DB_NAME", "grupo19")
+    # DB_NAME = environ.get("DB_NAME", "centros")
     SECRET_KEY = 'p9Bv<3Eid9%$i01'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://grupo19:NTNkMzM3NGUxYjdm@127.0.0.1/grupo19'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://centros:NTNkMzM3NGUxYjdm@127.0.0.1/centros'
 
 
 CONFIG = dict(

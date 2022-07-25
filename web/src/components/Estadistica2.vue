@@ -30,7 +30,7 @@ const EMPTY_DATA = {
         this.getData()
     },
     created() {
-        axios.get('https://admin-grupo19.proyecto2020.linti.unlp.edu.ar/estadisticas/centros/por/localidad')
+        axios.get('https://admin-covid-solidario.com.ar/estadisticas/centros/por/localidad')
   //    axios.get(process.env.VUE_APP_BACKEND +'/centros/all')
        // axios.get('http://:5000/tiposCentro')
       .then(response => {

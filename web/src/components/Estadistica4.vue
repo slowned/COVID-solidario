@@ -32,13 +32,8 @@ const EMPTY_DATA = {
         this.getData()
     },
     created() {
-  //      axios.get('https://admin-grupo19.proyecto2020.linti.unlp.edu.ar/tiposCentro')
       axios.get(process.env.VUE_APP_BACKEND +'/estadisticas/turnos-concurridos/')
-     //   axios.get('http://localhost:5000/estadisticas/turnos-concurridos/')
       .then(response => {
-        // JSON responses are automatically parsed.
-       
-        //this.chartData.rows = response.data.centros
         this.dat= response.data.turns
         DATA_FROM_BACKEND.rows= response.data.turns
     this.getData()

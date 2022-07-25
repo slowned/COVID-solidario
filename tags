@@ -13,7 +13,7 @@ CreateUserForm	app/forms/users.py	/^class CreateUserForm(Form):$/;"	c
 DB_HOST	config.py	/^    DB_HOST = "bd_name"$/;"	v	class:BaseConfig
 DB_HOST	config.py	/^    DB_HOST = environ.get("DB_HOST", "localhost")$/;"	v	class:TestingConfig
 DB_NAME	config.py	/^    DB_NAME = "db_name"$/;"	v	class:BaseConfig
-DB_NAME	config.py	/^    DB_NAME = environ.get("DB_NAME", "grupo19")$/;"	v	class:TestingConfig
+DB_NAME	config.py	/^    DB_NAME = environ.get("DB_NAME", "centros")$/;"	v	class:TestingConfig
 DB_PASS	config.py	/^    DB_PASS = "db_pass"$/;"	v	class:BaseConfig
 DB_PASS	config.py	/^    DB_PASS = environ.get("DB_PASS", "admin")$/;"	v	class:TestingConfig
 DB_USER	config.py	/^    DB_USER = "db_user"$/;"	v	class:BaseConfig
@@ -34,8 +34,8 @@ Role	app/models/user.py	/^class Role(db.Model):$/;"	c
 SECRET_KEY	config.py	/^    SECRET_KEY = "secret"$/;"	v	class:BaseConfig
 SECRET_KEY	config.py	/^    SECRET_KEY = 'p9Bv<3Eid9%$i01'$/;"	v	class:DevelopmentConfig
 SECRET_KEY	config.py	/^    SECRET_KEY = 'p9Bv<3Eid9%$i01'$/;"	v	class:ProductionConfig
-SQLALCHEMY_DATABASE_URI	config.py	/^    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql:\/\/admin:admin@localhost\/grupo19'$/;"	v	class:DevelopmentConfig
-SQLALCHEMY_DATABASE_URI	config.py	/^    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql:\/\/grupo19:NTNkMzM3NGUxYjdm@127.0.0.1\/grupo19'$/;"	v	class:ProductionConfig
+SQLALCHEMY_DATABASE_URI	config.py	/^    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql:\/\/admin:admin@localhost\/centros'$/;"	v	class:DevelopmentConfig
+SQLALCHEMY_DATABASE_URI	config.py	/^    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql:\/\/centros:NTNkMzM3NGUxYjdm@127.0.0.1\/centros'$/;"	v	class:ProductionConfig
 SQLALCHEMY_ECHO	config.py	/^    SQLALCHEMY_ECHO = True$/;"	v	class:DevelopmentConfig
 SQLALCHEMY_TRACK_MODIFICATIONS	config.py	/^    SQLALCHEMY_TRACK_MODIFICATIONS = True  # to fix error ??$/;"	v	class:DevelopmentConfig
 TESTING	config.py	/^    TESTING = True$/;"	v	class:TestingConfig
